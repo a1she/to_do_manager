@@ -1,5 +1,6 @@
 package todo.manager;
 
+import com.google.gson.Gson;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -41,10 +42,12 @@ public static void main(String[] args) {
             
             System.out.println("Enter an due date in the format dd-mm-yyyy");
             String taskDueDate = myScanner.nextLine();
-            Task newtask = new Task(taskID, taskTitle, taskDueDate, false);
+            //Task newtask = new Task(taskID, taskTitle, taskDueDate, false);
+            //idk if i need that even
             
             //don't know if this should be here:
             try {
+                //don't get what the code those there?
                 BufferedWriter writer = Files.newBufferedWriter(Paths.get("taskData.json"));
                 Map<String, Object> task = new HashMap<>();
                 task.put("ID", taskID);
@@ -53,10 +56,13 @@ public static void main(String[] args) {
                 //this is specfically for a new task so might have to create a sperate method for this
                 task.put("Done ", false);
 
+                Gson gson = new Gson();
+                writer.write(gson.toJson(task));
+                writer.close();
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            
         }
         else if (choice == 3){
 

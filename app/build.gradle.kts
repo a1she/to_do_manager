@@ -5,8 +5,7 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/9.0.0/userguide/building_java_projects.html in the Gradle documentation.
  */
 
-//Use the gson library to read & write data to json file
-implementation 'com.google.code.gson:gson:2.8.6'
+
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -27,6 +26,9 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+
+    //Use the gson library to read & write data to json file
+    implementation("com.google.code.gson:gson:2.10.1");
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
