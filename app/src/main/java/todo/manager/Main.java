@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.nio.file.Path;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 import java.util.Scanner;
@@ -25,6 +26,7 @@ public static void main(String[] args) {
     while (proceed.equals("Yes") || proceed.equals("yes")) {
         System.out.println("Now, Let's begin... In this programme you have a variety of choices:");
         System.out.println("Option 1: Create a new task");
+        System.out.println("Option 2: List all tasks");
 
         do {
             System.out.println("Please select (1-4)");
@@ -42,29 +44,41 @@ public static void main(String[] args) {
             
             System.out.println("Enter an due date in the format dd-mm-yyyy");
             String taskDueDate = myScanner.nextLine();
-            //Task newtask = new Task(taskID, taskTitle, taskDueDate, false);
-            //idk if i need that even
             
             //don't know if this should be here:
             try {
-                //don't get what the code those there?
-                BufferedWriter writer = Files.newBufferedWriter(Paths.get("taskData.json"));
-                Map<String, Object> task = new HashMap<>();
+                //gets location of the file path
+                Path filePath= Paths.get("taskData.json"); 
+                //location passed so that writer knows where to write to & opens/creates buffer writer
+                BufferedWriter writer = Files.newBufferedWriter(filePath);
+                //create a hashmap with values string & object and store in task.
+                Map<String, Object> task = new HashMap<String, Object>();
+
+                //add hashmap values to task
                 task.put("ID", taskID);
                 task.put("Title", taskTitle);
                 task.put("Due Date", taskDueDate);
+
                 //this is specfically for a new task so might have to create a sperate method for this
                 task.put("Done ", false);
-
+                //create instance of gson
                 Gson gson = new Gson();
-                writer.write(gson.toJson(task));
+                //converts java objects from task into json values
+                String inJson = gson.toJson(task);
+                //add json values to file location
+                writer.write(inJson);
                 writer.close();
 
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-        else if (choice == 3){
+        else if (choice == 2){
+            try {
+                
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
 
         }
     }
